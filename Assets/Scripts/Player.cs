@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
     public float reach = 8f;
 
     public Text jetpackFuelIndicator;
-    public Text selectedBlockText;
+    //public Text selectedBlockText;
     public byte selectedBlockIndex = 1;
 
     private void Start () {
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
         world = GameObject.Find ("World").GetComponent<World>();
 
         Cursor.lockState = CursorLockMode.Locked;
-        selectedBlockText.text = world.blocktypes [selectedBlockIndex].blockName + " block selected";
+        //selectedBlockText.text = world.blocktypes [selectedBlockIndex].blockName + " block selected";
         jetpackFuelIndicator.text = "Fuel: " + jetpackFuelCurrent + "/" + jetpackFuelMax;
     }
 
@@ -118,7 +118,6 @@ public class Player : MonoBehaviour {
         jetpackFuelCurrent -= jetpackFuelCost;
         verticalMomentum += jetpackFlightForce;
         jetpackActive = false;
-
     }
 
     private void GetPlayerInput () {
@@ -139,20 +138,6 @@ public class Player : MonoBehaviour {
             jetpackActive = true;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-        if (scroll != 0) {
-            if (scroll > 0) {
-                selectedBlockIndex ++;
-            } else {
-                selectedBlockIndex --;
-            }
-            if (selectedBlockIndex > (byte)(world.blocktypes.Length - 1))
-             selectedBlockIndex = 1;
-            if (selectedBlockIndex < 1)
-                selectedBlockIndex = (byte)(world.blocktypes.Length - 1);
-
-            selectedBlockText.text = world.blocktypes [selectedBlockIndex].blockName + " block selected";
-        }
 
         if (highlightBlock.gameObject.activeSelf) {
             // left click (destroy)

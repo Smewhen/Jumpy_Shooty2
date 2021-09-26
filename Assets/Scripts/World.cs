@@ -10,6 +10,7 @@ public class World : MonoBehaviour {
     public Vector3 spawnPosition;
 
     public Material material;
+    public Material transparentMaterial;
     public BlockType[] blocktypes;
 
     Chunk [,] chunks = new Chunk [VoxelData.WorldSizeInChunk, VoxelData.WorldSizeInChunk];
@@ -125,6 +126,18 @@ public class World : MonoBehaviour {
         return blocktypes [GetVoxel (pos)].isSolid;
     }
 
+        public bool CheckForTransparent (Vector3 pos) {
+        ChunkCoordinate thisChunk = new ChunkCoordinate (pos);
+
+        if (!IsChunkInWorld (thisChunk) || pos.y < 0 || pos.y > VoxelData.ChunkHeight) 
+            return false;
+
+        if (chunks [thisChunk.x, thisChunk.z] != null && chunks [thisChunk.x, thisChunk.z].isVoxelMapPopulated)
+            return blocktypes [chunks [thisChunk.x, thisChunk.z].GetVoxelFromGlobalVector3 (pos)].isTransparent;
+
+        return blocktypes [GetVoxel (pos)].isSolid;
+    }
+
     public byte GetVoxel (Vector3 pos) {
         int yPos = Mathf.FloorToInt (pos.y);
 
@@ -155,6 +168,17 @@ public class World : MonoBehaviour {
                 }
             }
         }
+
+        if (yPos == terrainHeight) {
+            if (Noise.Get2dPerlin (new Vector2 (pos.x, pos.z), 0, biome.treeZoneScale) > biome.treeZoneThreshold) {
+                voxelValue = 1;
+                if (Noise.Get2dPerlin (new Vector2 (pos.x, pos.z), 0, biome.treePlacementScale) > biome.treePlacementThreshold )
+                    voxelValue = 8;
+
+            }
+        }
+
+
         return voxelValue;
     }   
 
@@ -177,7 +201,11 @@ public class World : MonoBehaviour {
 [System.Serializable]
 public class BlockType {
     public string blockName;
+    public bool isTransparent;
     public bool isSolid;
+    public int hitPoints;
+    public int hardness;
+    public Sprite icon;
 
     [Header ("Texture Values")]
     public int backFaceTexture;

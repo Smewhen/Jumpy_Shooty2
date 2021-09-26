@@ -14,7 +14,7 @@ public static class VoxelData {
 
     public static readonly int viewDistance = 5;
 
-    public static readonly int TextureAtlasSizeInBlocks = 4;
+    public static readonly int TextureAtlasSizeInBlocks = 16;
     public static float NormalizedBlockTextureSize {
         
         get { return 1f / (float)TextureAtlasSizeInBlocks; }
@@ -23,23 +23,23 @@ public static class VoxelData {
     public static readonly Vector3[] voxelVertices = 
     {
         new Vector3(0.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, 0.0f, 1.0f),
-        new Vector3(1.0f, 0.0f, 1.0f),
-        new Vector3(1.0f, 1.0f, 1.0f),
-        new Vector3(0.0f, 1.0f, 1.0f)
+		new Vector3(1.0f, 0.0f, 0.0f),
+		new Vector3(1.0f, 1.0f, 0.0f),
+		new Vector3(0.0f, 1.0f, 0.0f),
+		new Vector3(0.0f, 0.0f, 1.0f),
+		new Vector3(1.0f, 0.0f, 1.0f),
+		new Vector3(1.0f, 1.0f, 1.0f),
+		new Vector3(0.0f, 1.0f, 1.0f)
     };
 
     public static readonly Vector3[] faceChecks = 
     {
         new Vector3(0.0f, 0.0f, -1.0f),
-        new Vector3(0.0f, 0.0f, 1.0f),
-        new Vector3(0.0f, 1.0f, 0.0f),
-        new Vector3(0.0f, -1.0f, 0.0f),
-        new Vector3(-1.0f, 0.0f, 0.0f),
-        new Vector3(1.0f, 0.0f, 0.0f)
+		new Vector3(0.0f, 0.0f, 1.0f),
+		new Vector3(0.0f, 1.0f, 0.0f),
+		new Vector3(0.0f, -1.0f, 0.0f),
+		new Vector3(-1.0f, 0.0f, 0.0f),
+		new Vector3(1.0f, 0.0f, 0.0f)
     };
 
     public static readonly int[,] voxelTriangles = 

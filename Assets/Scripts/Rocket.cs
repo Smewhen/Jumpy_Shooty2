@@ -15,10 +15,14 @@ public class Rocket : MonoBehaviour {
     }
 
     private void RocketCollision () {
-        if (world.CheckForVoxel (rocket.position)) {
+        if (
+            world.CheckForVoxel (rocket.position)
+            ) {
+            Debug.Log ("Explosion");
             world.GetChunkFromVector3 (rocket.position).EditVoxel (rocket.position, 0);
             Destroy (gameObject, 0.01f);
         } else
+            Debug.Log ("Miss");
             Destroy (gameObject, 2f);
     }
 }
